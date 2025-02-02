@@ -1,0 +1,5 @@
+working/
+node_modules/
+.env
+dist/
+src/
