@@ -1,5 +1,5 @@
 
-name: Build DevBuild
+name: Build
 on:
     workflow_dispatch:
     schedule:
