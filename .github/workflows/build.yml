@@ -16,8 +16,12 @@ jobs:
             - name: Use Node.js 20
               uses: actions/setup-node@v4
               with:
-                  node-version: 20
-                  cache: "pnpm"
+                node-version: 20
+
+            - name: Use pnpm 10
+              uses: pnpm/action-setup@v4
+              with:
+                version: 10
             
             - name: Clone build script
               run: git clone --depth 1 --branch main https://github.com/VendroidEnhanced/plugin .
