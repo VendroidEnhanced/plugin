@@ -29,3 +29,6 @@ jobs:
     
             - name: Run build script (Vencord)
               run: node index.mjs vencord
+
+            - name: Run build script (Equicord)
+              run: node index.mjs equicord

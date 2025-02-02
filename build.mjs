@@ -93,7 +93,9 @@ export function buildVencord(cloneURL, dirToLookAt = "vencord") {
 		recursive: true
 	});
 	execSync(
-		`export GH_TOKEN=${process.env.GH_TOKEN} && gh release upload devbuild --clobber dist/*`,
+		`export GH_TOKEN=${process.env.GH_TOKEN} && gh release upload ${
+			cloneURL.includes("Vencord") ? "devbuild" : "devbuild-equi"
+		} --clobber dist/*`,
 		{
 			stdio: "ignore"
 		}

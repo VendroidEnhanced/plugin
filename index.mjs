@@ -90,6 +90,16 @@ switch (chosenMod) {
 		)
 			.toString()
 			.trim();
-		successLog(startTime, commitInfo);
+		successLog(startTime, commitInfo, "Vencord");
+		break;
+	}
+	case "equicord": {
+		buildVencord("https://github.com/Vendicated/Vencord");
+		const commitInfo = execSync(
+			'cd working && git log -1 --pretty=format:"\\`%h\\` ~ %s"'
+		)
+			.toString()
+			.trim();
+		successLog(startTime, commitInfo, "Equicord");
 	}
 }

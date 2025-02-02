@@ -7,7 +7,7 @@ import { hostname } from "os";
  * @param {string} commitInfo
  * @returns
  */
-export function successLog(startTime, commitInfo) {
+export function successLog(startTime, commitInfo, repoName) {
 	if (!process.env.DISCORD_WEBHOOK) return;
 	const endTime = Math.floor(Date.now() / 1000);
 	fetch(process.env.DISCORD_WEBHOOK, {
@@ -20,6 +20,7 @@ export function successLog(startTime, commitInfo) {
 				{
 					color: 0xd79465,
 					description: `### <:husk:1279411419619655780> Successful build
+							> **Repository:** ${repoName}
 							> **Start time:** <t:${Math.floor(startTime / 1000)}:D> at <t:${Math.floor(
 						startTime / 1000
 					)}:T>
