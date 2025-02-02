@@ -1,0 +1,13 @@
+
+name: Build DevBuild
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "0 0 * * 0"
+
+jobs:
+    Build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: explode
+              run: echo explode
