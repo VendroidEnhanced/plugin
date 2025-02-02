@@ -26,6 +26,7 @@ export function successLog(startTime, commitInfo) {
 							> **End time:** <t:${endTime}:D> at <t:${endTime}:T>
 							> **Duration:** ${((Date.now() - startTime) / 1000).toFixed(2)} seconds
 							> **Builder hostname:** \`${hostname()}\`
+							> **Ran on:** \`${process.env.REASON}\`
 							> **Commit:** ${commitInfo}
 
 -# You can update to this build in VendroidEnhanced settings.`

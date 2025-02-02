@@ -8,6 +8,7 @@ on:
 env:
     GH_TOKEN: ${{ github.token }}
     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+    REASON: ${{ github.event_name }}
 
 jobs:
     Build:
