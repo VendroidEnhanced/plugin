@@ -68,7 +68,7 @@ export function buildVencord(cloneURL, dirToLookAt = "vencord") {
 	);
 
 	console.log("Installing Vencord deps");
-	execSync("cd working && pnpm i", {
+	execSync("cd working && pnpm i --no-frozen-lockfile", {
 		stdio: "inherit"
 	});
 
