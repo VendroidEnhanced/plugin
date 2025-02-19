@@ -61,7 +61,7 @@ export function buildVencord(cloneURL, dirToLookAt = "vencord") {
 
 	console.log(`Cloning ${cloneURL}`);
 	execSync(
-		"git clone --depth 1 --branch main ${cloneURL} working/", // FIXME: clone more securely
+		`git clone --depth 1 --branch main ${cloneURL} working/`, // FIXME: clone more securely
 		{
 			stdio: "ignore"
 		}
