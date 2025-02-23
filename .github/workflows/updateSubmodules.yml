@@ -21,6 +21,11 @@ jobs:
       - name: Clone build script
         run: git clone --depth 1 --branch main https://github.com/VendroidEnhanced/plugin .
 
+      - name: Config author
+        run: |
+          git config --global user.email "personal@nin0.dev"
+          git config --global user.name "gh-actions"
+
       - name: Update submodules
         run: node _scripts/updateSubmodules.mjs
 
