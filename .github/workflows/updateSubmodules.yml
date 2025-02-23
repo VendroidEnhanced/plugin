@@ -1,0 +1,30 @@
+name: Update submodules
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  REASON: ${{ github.event_name }}
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Clone build script
+        run: git clone --depth 1 --branch main https://github.com/VendroidEnhanced/plugin .
+
+      - name: Update submodules
+        run: node _scripts/updateSubmodules.mjs
+
+      - name: Push changes
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/VendroidEnhanced/plugin
+          git push origin main

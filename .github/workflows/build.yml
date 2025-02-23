@@ -28,7 +28,7 @@ jobs:
               run: git clone --depth 1 --branch main https://github.com/VendroidEnhanced/plugin .
     
             - name: Run build script (Vencord)
-              run: node index.mjs vencord
+              run: node _scripts/index.mjs vencord
 
             - name: Run build script (Equicord)
-              run: node index.mjs equicord
+              run: node _scripts/index.mjs equicord
