@@ -9,7 +9,7 @@ try {
 	execSync("git add *", {
 		stdio: "inherit"
 	});
-	execSync("git commit -m 'updated submodules'", {
+	execSync("git commit -m '[automated] updated submodules'", {
 		stdio: "inherit"
 	});
 } catch (e) {}
