@@ -33,7 +33,7 @@ function applyChanges(sourceDir) {
 }
 
 function copyFiles(clientMod) {
-	const dir = clientMod === "Vencord" ? "working/dist" : "working/dist/browser";
+	const dir = clientMod === "vencord" ? "working/dist" : "working/dist/browser";
 	cpSync(`${dir}/browser.js`, "dist/browser.js", {
 		recursive: true
 	});
