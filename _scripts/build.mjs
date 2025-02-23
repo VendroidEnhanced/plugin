@@ -11,29 +11,15 @@ import {
 } from "fs";
 import { join } from "path";
 
-/**
- *
- * @param {string} sourceDir
- */
-function applyChanges(sourceDir) {
-	const files = readdirSync(sourceDir);
-	const filesToCopy = files.filter(f => !f.endsWith(".patch"));
-	const patches = files.filter(f => f.endsWith(".patch"));
-	for (const file of filesToCopy) {
-		const path = join("working/", file.replaceAll("_", "/"));
-		console.log("Copying", file, "to", path);
-		cpSync(join(sourceDir, file), path, {
-			recursive: true
-		});
-	}
-	for (const patch of patches) {
-		console.log("Applying patch", patch);
-		execSync(`cd working && git apply ../${sourceDir}/${patch}`);
-	}
+function applyChanges() {
+	cpSync("plugins/", "working/src/plugins/", {
+		recursive: true
+	});
 }
 
 function copyFiles(clientMod) {
-	const dir = clientMod === "vencord" ? "working/dist" : "working/dist/browser";
+	const dir =
+		clientMod === "vencord" ? "working/dist" : "working/dist/browser";
 	cpSync(`${dir}/browser.js`, "dist/browser.js", {
 		recursive: true
 	});
@@ -85,10 +71,7 @@ export function buildVencord(cloneURL, clientMod) {
 		stdio: "inherit"
 	});
 
-	console.log("Applying common files");
-	applyChanges("src/common");
-	console.log("Applying", clientMod, "files");
-	applyChanges(`src/${clientMod}`);
+	applyChanges();
 
 	console.log("Building Vencord");
 	execSync("cd working && pnpm buildWeb", {
@@ -99,7 +82,7 @@ export function buildVencord(cloneURL, clientMod) {
 	copyFiles(clientMod);
 	execSync(
 		`export GH_TOKEN=${process.env.GH_TOKEN} && gh release upload ${
-			clientMod === "vencord" ? "devbuild" : "devbuild-equi"
+			clientMod === "vencord" ? "vencord" : "equicord"
 		} --clobber dist/*`,
 		{
 			stdio: "ignore"

@@ -1,0 +1,3 @@
+[submodule "plugins/vendroidEnhancements"]
+	path = plugins/vendroidEnhancements
+	url = https://github.com/VendroidEnhanced/vendroidEnhancements
