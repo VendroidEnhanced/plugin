@@ -34,9 +34,9 @@ function applyChanges(sourceDir) {
 
 /**
  * @param {string} cloneURL
- * @param {string} dirToLookAt
+ * @param {string} clientMod
  */
-export function buildVencord(cloneURL, dirToLookAt = "vencord") {
+export function buildVencord(cloneURL, clientMod) {
 	if (
 		!/^https:\/\/(github\.com|codeberg\.org|git\.nin0\.dev)\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-\._]+(?:\.git)?\/?$/.test(
 			cloneURL
@@ -74,8 +74,8 @@ export function buildVencord(cloneURL, dirToLookAt = "vencord") {
 
 	console.log("Applying common files");
 	applyChanges("src/common");
-	console.log("Applying", dirToLookAt, "files");
-	applyChanges(`src/${dirToLookAt}`);
+	console.log("Applying", clientMod, "files");
+	applyChanges(`src/${clientMod}`);
 
 	console.log("Building Vencord");
 	execSync("cd working && pnpm buildWeb", {

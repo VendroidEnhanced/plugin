@@ -84,7 +84,7 @@ try {
 
 switch (chosenMod) {
 	case "vencord": {
-		buildVencord("https://github.com/Vendicated/Vencord");
+		buildVencord("https://github.com/Vendicated/Vencord", "vencord");
 		const commitInfo = execSync(
 			'cd working && git log -1 --pretty=format:"\\`%h\\` ~ %s"'
 		)
