@@ -32,6 +32,19 @@ function applyChanges(sourceDir) {
 	}
 }
 
+function copyFiles(clientMod) {
+	const dir = clientMod === "Vencord" ? "working/dist" : "working/dist/browser";
+	cpSync(`${dir}/browser.js`, "dist/browser.js", {
+		recursive: true
+	});
+	cpSync(`${dir}/browser.css`, "dist/browser.css", {
+		recursive: true
+	});
+	cpSync(`${dir}/browser.js.LEGAL.txt`, "dist/browser.js.LEGAL.txt", {
+		recursive: true
+	});
+}
+
 /**
  * @param {string} cloneURL
  * @param {string} clientMod
@@ -83,18 +96,10 @@ export function buildVencord(cloneURL, clientMod) {
 	});
 
 	console.log("Releasing");
-	cpSync("working/dist/browser.js", "dist/browser.js", {
-		recursive: true
-	});
-	cpSync("working/dist/browser.css", "dist/browser.css", {
-		recursive: true
-	});
-	cpSync("working/dist/browser.js.LEGAL.txt", "dist/browser.js.LEGAL.txt", {
-		recursive: true
-	});
+	copyFiles(clientMod);
 	execSync(
 		`export GH_TOKEN=${process.env.GH_TOKEN} && gh release upload ${
-			cloneURL.includes("Vencord") ? "devbuild" : "devbuild-equi"
+			clientMod === "vencord" ? "devbuild" : "devbuild-equi"
 		} --clobber dist/*`,
 		{
 			stdio: "ignore"
