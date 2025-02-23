@@ -32,11 +32,24 @@ function applyChanges(sourceDir) {
 	}
 }
 
+function copyFiles(clientMod) {
+	const dir = clientMod === "vencord" ? "working/dist" : "working/dist/browser";
+	cpSync(`${dir}/browser.js`, "dist/browser.js", {
+		recursive: true
+	});
+	cpSync(`${dir}/browser.css`, "dist/browser.css", {
+		recursive: true
+	});
+	cpSync(`${dir}/browser.js.LEGAL.txt`, "dist/browser.js.LEGAL.txt", {
+		recursive: true
+	});
+}
+
 /**
  * @param {string} cloneURL
- * @param {string} dirToLookAt
+ * @param {string} clientMod
  */
-export function buildVencord(cloneURL, dirToLookAt = "vencord") {
+export function buildVencord(cloneURL, clientMod) {
 	if (
 		!/^https:\/\/(github\.com|codeberg\.org|git\.nin0\.dev)\/[a-zA-Z0-9-]+\/[a-zA-Z0-9-\._]+(?:\.git)?\/?$/.test(
 			cloneURL
@@ -74,8 +87,8 @@ export function buildVencord(cloneURL, dirToLookAt = "vencord") {
 
 	console.log("Applying common files");
 	applyChanges("src/common");
-	console.log("Applying", dirToLookAt, "files");
-	applyChanges(`src/${dirToLookAt}`);
+	console.log("Applying", clientMod, "files");
+	applyChanges(`src/${clientMod}`);
 
 	console.log("Building Vencord");
 	execSync("cd working && pnpm buildWeb", {
@@ -83,18 +96,10 @@ export function buildVencord(cloneURL, dirToLookAt = "vencord") {
 	});
 
 	console.log("Releasing");
-	cpSync("working/dist/browser.js", "dist/browser.js", {
-		recursive: true
-	});
-	cpSync("working/dist/browser.css", "dist/browser.css", {
-		recursive: true
-	});
-	cpSync("working/dist/browser.js.LEGAL.txt", "dist/browser.js.LEGAL.txt", {
-		recursive: true
-	});
+	copyFiles(clientMod);
 	execSync(
 		`export GH_TOKEN=${process.env.GH_TOKEN} && gh release upload ${
-			cloneURL.includes("Vencord") ? "devbuild" : "devbuild-equi"
+			clientMod === "vencord" ? "devbuild" : "devbuild-equi"
 		} --clobber dist/*`,
 		{
 			stdio: "ignore"
