@@ -82,6 +82,11 @@ try {
 	throw new Error("Missing pnpm, gh or git");
 }
 
+console.log("Updating submodules");
+execSync("git submodule update --remote --merge --init --recursive", {
+	stdio: "pipe"
+});
+
 switch (chosenMod) {
 	case "vencord": {
 		buildVencord("https://github.com/Vendicated/Vencord", "vencord");
