@@ -67,7 +67,7 @@ export function buildVencord(cloneURL, clientMod) {
 	);
 
 	console.log("Installing Vencord deps");
-	execSync("cd working && pnpm i --no-lockfile", {
+	execSync("cd working && pnpm i --no-frozen-lockfile", {
 		stdio: "inherit"
 	});
 
