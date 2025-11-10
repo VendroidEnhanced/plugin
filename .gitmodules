@@ -1,3 +1,6 @@
 [submodule "plugins/vendroidEnhancements"]
 	path = plugins/vendroidEnhancements
 	url = https://github.com/VendroidEnhanced/vendroidEnhancements
+[submodule "plugins/vendroidSheets"]
+	path = plugins/vendroidSheets
+	url = git@github.com:VendroidEnhanced/vendroidSheets.git
