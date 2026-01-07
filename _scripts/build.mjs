@@ -82,7 +82,7 @@ export function buildVencord(cloneURL, clientMod) {
 	copyFiles(clientMod);
 	execSync(
 		`export GH_TOKEN=${process.env.GH_TOKEN} && gh release upload ${
-			clientMod === "vencord" ? "vencord" : "equicord"
+			clientMod === "vencord" ? "vencord-new" : "equicord-new"
 		} --clobber dist/*`,
 		{
 			stdio: "ignore"
